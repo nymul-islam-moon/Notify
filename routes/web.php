@@ -1,6 +1,8 @@
 <?php
 
+use App\Http\Controllers\FacultyController;
 use App\Http\Controllers\ProfileController;
+use App\Models\Routegroup;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -13,6 +15,19 @@ use Illuminate\Support\Facades\Route;
 | be assigned to the "web" middleware group. Make something great!
 |
 */
+
+/**--------------------------- Admin Route ----------------------------------- */
+Route::prefix('faculty')->group( function (){
+
+    Route::controller(FacultyController::class)->group(function () {
+        Route::get('/login', 'index')->name('faculty_login');
+        Route::post('/login/admin', 'login')->name('faculty.login');
+        Route::get('/logout', 'logout')->name('faculty.logout');
+        Route::get('/register', 'register')->name('faculty.register');
+        Route::get('/dashboard', 'dashboard')->name('faculty.dashboard')->middleware('faculty');
+    });
+});
+
 
 Route::get('/', function () {
     return view('welcome');
