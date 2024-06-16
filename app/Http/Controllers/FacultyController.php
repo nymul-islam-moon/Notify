@@ -2,8 +2,12 @@
 
 namespace App\Http\Controllers;
 
+use Hash;
 use Auth;
+use Carbon\Carbon;
+use App\Models\Faculty;
 use Illuminate\Http\Request;
+use Illuminate\Validation\Rules\Password;
 
 class FacultyController extends Controller
 {
@@ -53,71 +57,17 @@ class FacultyController extends Controller
 
     public function register() {
         return view('faculty.faculty_register');
-    }
+    } // end method
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
-    }
+    public function register_store(Request $request) {
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(Request $request)
-    {
-        //
-    }
+        Faculty::insert([
+            'name' => $request->name,
+            'email' => $request->email,
+            'password' => Hash::make( $request->password ),
+            'created_at' => Carbon::now(),
+        ]);
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, $id)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy($id)
-    {
-        //
+        return redirect()->route('faculty_login')->with('success', 'Faculty Created Successfully');
     }
 }

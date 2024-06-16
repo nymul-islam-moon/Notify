@@ -21,7 +21,8 @@ Route::prefix('faculty')->group( function (){
 
     Route::controller(FacultyController::class)->group(function () {
         Route::get('/login', 'index')->name('faculty_login');
-        Route::post('/login/admin', 'login')->name('faculty.login');
+        Route::post('/login/owner', 'login')->name('faculty.login');
+        Route::post('/register/create', 'register_store')->name('faculty.register.create');
         Route::get('/logout', 'logout')->name('faculty.logout');
         Route::get('/register', 'register')->name('faculty.register');
         Route::get('/dashboard', 'dashboard')->name('faculty.dashboard')->middleware('faculty');

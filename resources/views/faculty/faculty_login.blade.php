@@ -107,6 +107,9 @@
                                             </div>
                                         </form>
                                     </div>
+                                    <div class="mt-5 text-center">
+                                        <p class="mb-0">Don't have an account ? <a href="{{ route('faculty.register') }}" class="fw-semibold text-primary text-decoration-underline"> Signup</a> </p>
+                                    </div>
                                 </div>
                             </div>
                             <!-- end col -->
