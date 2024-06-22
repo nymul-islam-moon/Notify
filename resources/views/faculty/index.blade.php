@@ -233,6 +233,7 @@
 @stack('js')
 
 <script>
+
     @if (Session::has('success'))
         var type="{{ Session::get('alert-type', 'info') }}"
         switch(type) {
